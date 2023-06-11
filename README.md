@@ -83,7 +83,7 @@ Project Link: [https://github.com/CurbSofwareInc/caprover-curb-click-apps](https
   
 ## Contributors
 
-Thank you to all the contributors who participate in this project now and going forware.
+Thank you to all the contributors who participate in this project now and going forward.
 
 <table>
   <tr>
