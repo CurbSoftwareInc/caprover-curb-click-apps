@@ -1,0 +1,136 @@
+captainVersion: 4
+services:
+  # ToolJet
+  $$cap_appname:
+    image: tooljet/try:latest
+    restart: always
+    environment:
+      TOOLJET_HOST: http://$$cap_appname.$$cap_root_domain
+      LOCKBOX_MASTER_KEY: $$cap_gen_random_hex(32)
+      SECRET_KEY_BASE: $$cap_gen_random_hex(32)
+      COMMENT_FEATURE_ENABLE: $$cap_comment_feature_enable
+      ENABLE_MULTIPLAYER_EDITING: $$cap_enable_multiplayer_editing
+      ENABLE_MARKETPLACE_FEATURE: $$cap_enable_marketplace_feature
+      DEFAULT_FROM_EMAIL: $$cap_default_from_email
+      SMTP_USERNAME: $$cap_smtp_username
+      SMTP_PASSWORD: $$cap_smtp_password
+      SMTP_DOMAIN: $$cap_smtp_domain
+      SMTP_PORT: $$cap_smtp_port
+      SSO_ACCEPTED_DOMAINS: $$cap_root_domain
+      HIDE_ACCOUNT_SETUP_LINK: $$cap_hide_account_setup_link
+      DISABLE_SIGNUPS: $$cap_disable_signups
+      ENABLE_MARKETPLACE_DEV_MODE: $$cap_enable_marketplace_dev_mode
+      DEPLOYMENT_PLATFORM: $$cap_deployment_platform
+      DISABLE_APP_TELEMETRY: $$cap_disable_app_telemetry
+      CHECK_FOR_UPDATES: $$cap_check_for_updates
+      USER_SESSION_EXPIRY: $$cap_user_session_expiry
+    volumes:
+      - $$cap_appname-data:/var/lib/postgresql/13/main
+caproverOneClickApp:
+  variables:
+    - id: $$cap_app_version
+      label: ToolJet Version
+      defaultValue: "latest"
+      description: Check out their Docker page for the valid tags https://hub.docker.com/r/tooljet/try/tags
+      validRegex: /^([^\s^\/])+$/
+    - id: $$cap_comment_feature_enable
+      label: Enable Comment Feature
+      defaultValue: "true"
+      description: ""
+      validRegex: /.{1,}/
+    - id: $$cap_enable_multiplayer_editing
+      label: Enable Multiplayer Editing
+      defaultValue: "true"
+      description: ""
+      validRegex: /.{1,}/
+    - id: $$cap_enable_marketplace_feature
+      label: Enable Marketplace Feature
+      defaultValue: "true"
+      description: ""
+      validRegex: /.{1,}/
+    - id: $$cap_default_from_email
+      label: Default From Email
+      defaultValue: "no-reply@$$cap_root_domain"
+      description: ""
+      validRegex: /.{1,}/
+    - id: $$cap_smtp_port
+      label: SMTP Port
+      defaultValue: "465"
+      description: ""
+      validRegex: /.{1,}/
+    - id: $$cap_smtp_password
+      label: SMTP Password
+      defaultValue: $$cap_gen_random_hex(32)
+      description: ""
+    - id: $$cap_smtp_username
+      label: SMTP Username
+      defaultValue: "no-reply@$$cap_root_domain"
+      description: ""
+      validRegex: /.{1,}/
+    - id: $$cap_smtp_domain
+      label: SMTP Domain
+      defaultValue: "mail.$$cap_root_domain"
+      description: ""
+      validRegex: /.{1,}/
+    - id: $$cap_sso_accepted_domains
+      label: SSO Accepted Domains
+      defaultValue: "$$cap_root_domain"
+      description: ""
+      validRegex: /.{1,}/
+    - id: $$cap_deployment_platform
+      label: Deployment Platform
+      defaultValue: docker
+      description: ""
+      validRegex: /.{1,}/
+    - id: $$cap_user_session_expiry
+      label: User Session Expiry
+      defaultValue: "3600"
+      description: ""
+      validRegex: /.{1,}/
+    - id: $$cap_hide_account_setup_link
+      label: Hide Account Setup Link
+      defaultValue: "true"
+      description: ""
+      validRegex: /.{1,}/
+    - id: $$cap_disable_signups
+      label: Disable Signups
+      defaultValue: "true"
+      description: ""
+      validRegex: /.{1,}/
+    - id: $$cap_enable_marketplace_dev_mode
+      label: Enable Marketplace Dev Mode
+      defaultValue: "true"
+      description: ""
+      validRegex: /.{1,}/
+    - id: $$cap_disable_app_telemetry
+      label: Disable App Telemetry
+      defaultValue: "true"
+      description: ""
+      validRegex: /.{1,}/
+    - id: $$cap_check_for_updates
+      label: Check For Updates
+      defaultValue: "true"
+      description: ""
+      validRegex: /.{1,}/
+    - id: $$cap_lockbox_master_key
+      label: Lockbox Master Key
+      defaultValue: $$cap_gen_random_hex(32)
+      description: ""
+      validRegex: /.{1,}/
+  instructions:
+    start: >-
+      Build complicated internal tools quickly with less engineering efforts. Maximize productivity, reduce costs, and deploy faster with our enterprise-grade open-source low-code platform.
+    end: >-
+      Done! 🚀🚀🚀
+
+      This is a quick-start app and may not be suitable for production use.
+
+      Your service is available at http://$$cap_appname.$$cap_root_domain
+
+      Make sure to change the ToolJet host to https in the config after you enable SSL and websocket support.
+
+      Another non-offical one-click-app for caprover by CurbSoftware and the Devious Jack
+  displayName: "ToolJet"
+  isOfficial: false
+  description: ToolJet is an open-source low-code framework to build and deploy custom internal tools.
+  documentation: https://docs.tooljet.com/docs/
