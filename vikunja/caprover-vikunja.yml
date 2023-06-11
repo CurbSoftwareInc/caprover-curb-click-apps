@@ -1,0 +1,97 @@
+captainVersion: 4
+services:
+  # Vikunja
+  $$cap_appname:
+    image: vikunja/frontend:$$cap_app_version
+    depends_on:
+      - $$cap_appname-db
+      - $$cap_appname-api
+    restart: always
+    environment:
+      VIKUNJA_API_URL: https://$$cap_appname-api.$$cap_root_domain/api/v1
+    caproverExtra:
+      containerHttpPort: "80"
+  $$cap_appname-api:
+    image: vikunja/api:$$cap_app_api_version
+    restart: always
+    environment:
+      VIKUNJA_CORS_ORIGINS: https://$$cap_appname.$$cap_root_domain
+      VIKUNJA_SERVICE_ENABLEREGISTRATION: $$cap_app_enable_registration
+      VIKUNJA_SERVICE_TIMEZONE: $$cap_app_timezone
+      VIKUNJA_DATABASE_HOST: srv-captain--$$cap_appname-db
+      VIKUNJA_DATABASE_TYPE: mysql
+      VIKUNJA_DATABASE_USER: $$cap_app_db_user
+      VIKUNJA_SERVICE_FRONTENDURL: https://$$cap_appname.$$cap_root_domain/
+      VIKUNJA_DATABASE_PASSWORD: $$cap_app_db_password
+      VIKUNJA_DATABASE_DATABASE: $$cap_app_db_name
+    volumes:
+      - $$cap_appname-api-data:/app/vikunja/files
+    caproverExtra:
+      containerHttpPort: "3456"
+  $$cap_appname-db:
+    image: mariadb:$$cap_app_db_version
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: $$cap_app_db_password
+      MYSQL_USER: $$cap_app_db_user
+      MYSQL_PASSWORD: $$cap_app_db_password
+      MYSQL_DATABASE: $$cap_app_db_name
+    volumes:
+      - $$cap_appname-db-data:/var/lib/mysql
+    caproverExtra:
+      notExposeAsWebApp: "true"
+caproverOneClickApp:
+  variables:
+    - id: $$cap_app_version
+      label: Vicunja Version
+      defaultValue: "latest"
+      description: Check out their Docker page for the valid tags https://hub.docker.com/r/vikunja/frontend/tags
+      validRegex: /^([^\s^\/])+$/
+    - id: $$cap_app_api_version
+      label: Vicunja API Version
+      defaultValue: "latest"
+      description: Check out their Docker page for the valid tags https://hub.docker.com/r/vikunja/api/tags
+      validRegex: /^([^\s^\/])+$/
+    - id: $$cap_app_timezone
+      label: Vicunja Timezone
+      defaultValue: "America/Vancouver"
+      description: Check out https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for valid timezones
+    - id: $$cap_app_enable_registration
+      label: Enable Registration
+      defaultValue: "true"
+      description: Set to false to disable registration
+      validRegex: /^([^\s^\/])+$/
+    - id: $$cap_app_db_version
+      label: MariaDB Version
+      defaultValue: "latest"
+      description: Check out their Docker page for the valid tags https://hub.docker.com/_/mariadb/tags
+      validRegex: /^([^\s^\/])+$/
+    - id: $$cap_app_db_user
+      label: MariaDB User
+      defaultValue: "vikunja"
+      validRegex: /^([^\s^\/])+$/
+    - id: $$cap_app_db_password
+      label: MariaDB Password
+      defaultValue: $$cap_gen_random_hex(32)
+      validRegex: /^([^\s^\/])+$/
+    - id: $$cap_app_db_name
+      label: MariaDB Database Name
+      defaultValue: "vikunja"
+      validRegex: /^([^\s^\/])+$/
+  instructions:
+    start: >-
+      The open-source, self-hostable to-do app. Organize everything, on all platforms.
+    end: >-
+      Done! 🦙🦙🦙
+
+      REALLY IMPORTANT: Make sure to enable https in the config and direct requests to https as well as enable websocket support for the API and the Frontend Apps.  Then wait a minute for the app to start. Many env variables available, see: https://vikunja.io/docs/config-options/
+
+      SUPER IMPORTANT: On the first time you visit the frontend app make sure that the correct url for the API where it says Vicunja URL is entered to confirm it is correct.
+
+      Your service wil be available at https://$$cap_appname.$$cap_root_domain and the api at https://$$cap_appname-api.$$cap_root_domain after enabling https.  After registering your users you may wish to set VIKUNJA_SERVICE_ENABLEREGISTRATION to false in the API container to disable registration.
+
+      Another non-offical one-click-app for caprover by CurbSoftware and the Devious Jack
+  displayName: "Vikuja"
+  isOfficial: false
+  description: Think of Vikunja like the notebook you have with all your things to keep track of.
+  documentation: https://vikunja.io/docs/
