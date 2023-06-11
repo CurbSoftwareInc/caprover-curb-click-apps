@@ -58,16 +58,12 @@ In the 'One-Click Apps' database, paste the copied YAML from the application you
 
 ![Paste YML Code](https://github.com/CurbSoftwareInc/caprover-curb-click-apps/raw/main/instruction-images/instruction-paste-yml-code.png)
 
-For the ToolJet app, you may wish to increase security by adding basic authentication. For some apps, you may want to disable user registration after your admin user has been added in the environment variables.
+For the ToolJet app, it is not a production setup, and you can also help to increase security by adding basic authentication. For some apps, you may want to disable user registration after your admin user has been added in the environment variables.
 
 Additional environment variables are included in the markdown readme files in each of the application folders on this repo. Make sure to refer to these for application-specific settings and configurations.
 
 **Note**: These instructions are only a guideline. Each application may have specific requirements or additional steps to function correctly. Always refer to the specific readme file in each application folder for detailed instructions.
 
-
-For the ToolJet app, you may wish to increase security by adding basic authentication. For some apps, you may want to disable user registration after your admin user has been added in the environment variables.
-
-Additional environment variables are included in the markdown readme files in each of the application folders on this repo. Make sure to refer to these for application-specific settings and configurations.
 
 Remember, these instructions are only a guideline. Each application may have specific requirements or additional steps to function correctly. Always refer to the specific readme file in each application folder for detailed instructions.
 
