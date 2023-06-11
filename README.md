@@ -54,9 +54,16 @@ Select the 'Template' option with the CapRover logo.
 ![Select Template App](https://github.com/CurbSoftwareInc/caprover-curb-click-apps/raw/main/instruction-images/instruction-select-template-app.png)
 
 ### Step 5: Paste the copied YAML
-In the 'One-Click Apps' database, paste the copied YAML from the application you want from this repository. Click 'Next' and follow the remaining instructions. This will include choices about whether to enable SSL, HTTPS, web sockets, and other settings.
+In the 'One-Click Apps' database, paste the copied YAML from the application you want from this repository. Click 'Next' and follow the remaining instructions.
 
 ![Paste YML Code](https://github.com/CurbSoftwareInc/caprover-curb-click-apps/raw/main/instruction-images/instruction-paste-yml-code.png)
+
+### Step 6: Visit the app config in your CapRover Dashboard
+
+This will include choices about whether to enable SSL with Let's Encrypt, force HTTPS, enable web sockets, and other settings.
+
+
+### Other Info:
 
 For the ToolJet app, it is not a production setup because it's usint the tooljet/try image.
 
